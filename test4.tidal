@@ -1,0 +1,30 @@
+
+
+-- how to sequence??
+d1
+  $ cat
+  [
+    fast 2 $ s "supergong" # n "<10 8 6 1 ~ 1 8 10 6 ~>" |-| n "3"
+    # voice "[0.1, 0]/8" # attack "0.9" # decay "1.5" # sustain "5" # release "8"
+    # room 0.3 # vowel "u" # size "0" # gain 0.8 # lpf 1000
+  ]
+
+xfadeIn 1 0.1
+  $ stack
+  [
+    slow 1.5 $ s "<supergong>" # n "-10 ~" |+| n "10 ~"
+    # voice "[0.1, 0]/8" # attack "0.7" # sustain "4" # release "4" # decay "1.5"
+    # room 0.3 # vowel "u" # size "0" # gain 0.8 # lpf 1000,
+    degradeBy 0.75 $ sound "birds" # n (irand 10) # gain 0.5
+  ]
+
+xfadeIn 1 4
+  $ stack
+  [
+    off 0.125 (+12) $ slow 2 $ n "<[d4, f4, a3] [c4, e4, g3] [a3, c4, e4]>" # s "superpiano"
+    # room 0.3 # vowel "u" # gain 0.7 # lpf (range 500 1500 sine)
+  ]
+
+xfadeIn 2 4 $ n "<1 2 3 4 5 6 7 8 ~>" # vowel "o" # sound "numbers" # gain 0.9 # room 0.3 # lpf 2900
+
+hush

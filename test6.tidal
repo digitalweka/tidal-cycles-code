@@ -1,0 +1,48 @@
+setcps (140/60/4)
+
+do {
+  d1 $ seqPLoop [
+    (0, 4, stack [
+      n "<a2*8 [a2*4 [a2 af2 gf2 f2]] ff2*8 [[ef2 ff2 ff2 ff2] [ff2*4]]>" # s "supersaw",
+      n "<c4'min [c4'min [c4'min cf4'min bf3'min a3'maj]] af3'maj ~>" # s "superzow"
+    ]),
+    (4, 8, stack [
+      n "<a2*8 [a2*4 [a2 af2 gf2 f2]] ff2*8 [[ef2 ff2 ff2 ff2] [ff2 f2 gf2 g2]]>" # s "supersaw",
+      n "<c4'min [c4'min [c4'min cf4'min bf3'min a3'maj]] af3'maj [[gf3'maj af3'maj ~ ~] [a3'maj a3'maj bf3'maj b3'min]]>" # s "superzow"
+    ]),
+    (8, 13, stack [
+      n "<a2*8 a2*8 d3*8 gf2*8 [[a2*4] [a2 a2 a2 gf2]]>" # s "supersaw",
+      n "<~ [~ g6 c7 g6] [[bf6 ~ ~ af6] [af6]] [[~ f6] [bf6 ~ ~ f6]] [g6 ~ ~ ~]>" # s "superhoover",
+      n "<c4'min [~ [ef4, g4] [ef4, c4] g4] [[[c4, f4, bf4] ~ ~ af4] f4'min] [[bf4'maj f4] [[d4, bf4] ~ ~ f4]] [c'min]>" # s "superzow"
+    ])
+  ] # room 0.08
+}
+
+hush
+
+do {
+  d1 $ seqPLoop [
+    (0, 4, stack [
+      n "<a2*8 [a2*4 [a2 af2 gf2 f2]] ff2*8 [[ef2 ff2 ff2 ff2] [ff2*4]]>" # s "superpiano",
+      n "<c4'min [c4'min [c4'min cf4'min bf3'min a3'maj]] af3'maj ~>" # s "superpiano"
+    ]),
+    (4, 8, stack [
+      n "<a2*8 [a2*4 [a2 af2 gf2 f2]] ff2*8 [[ef2 ff2 ff2 ff2] [ff2 f2 gf2 g2]]>" # s "superpiano",
+      n "<c4'min [c4'min [c4'min cf4'min bf3'min a3'maj]] af3'maj [[gf3'maj af3'maj ~ ~] [a3'maj a3'maj bf3'maj b3'min]]>" # s "superpiano"
+    ]),
+    (8, 13, stack [
+      n "<a2*8 a2*8 d3*8 gf2*8 [[a2*4] [a2 a2 a2 gf2]]>" # s "superpiano",
+      n "<~ [~ g6 c7 g6] [[bf6 ~ ~ af6] [af6]] [[~ f6] [bf6 ~ ~ f6]] [g6 ~ ~ ~]>" # s "superpiano",
+      n "<c4'min [~ [ef4, g4] [ef4, c4] g4] [[[c4, f4, bf4] ~ ~ af4] f4'min] [[bf4'maj f4] [[d4, bf4] ~ ~ f4]] [c'min]>" # s "superpiano"
+    ])
+  ] # room 0.08
+}
+
+
+d1 $ stack [
+n "<a2*8 a2*8 d3*8 gf2*8 [[a2*4] [a2 a2 a2 gf2]]>" # s "supersaw",
+n "<~ [~ g6 c7 g6] [[bf6 ~ ~ af6] [af6]] [[~ f6] [bf6 ~ ~ f6]] [g6 ~ ~ ~]>" # s "supersaw",
+n "<c4'min [~ [ef4, g4] [ef4, c4] g4] [[[c4, f4, bf4] ~ ~ af4] f4'min] [[bf4'maj f4] [[d4, bf4] ~ ~ f4]] [c'min]>" # s "superzow"
+] # room 0.2 # legato 1
+
+hush

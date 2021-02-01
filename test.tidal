@@ -1,0 +1,17 @@
+bps (140/120)
+
+d1 $ sound "[bd [~ bd] [~ bd] <cp cp*2>, hh*8]"
+# room 0.1
+# orbit 0
+
+d2 $ degradeBy 0.25 $ loopAt 4 $ n "[c6, e6, a5]*8 [c6, e6, a5]*8 [cf6, e6, a5]*8 [cf6, e6, g5]*8"
+# s "supermandolin"
+# gain 0.87
+# room 1.5
+# orbit 1
+
+d3 $ off 0.125 (+12) $ loopAt 2 $ n "<[c6, e6, a5] [cf6, e6, g5] [g6, e6, c6] [cf6, e6, g5]>"
+# s "superpiano"
+# lpf "3000 10000"
+
+hush

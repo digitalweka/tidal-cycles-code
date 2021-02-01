@@ -1,0 +1,150 @@
+setcps (300/60/8)
+
+d1 $ stack [
+  n "1(5,16)" # s "jungbass:5" # cut 1 # gain 2 # orbit 2
+]
+
+hush
+
+d1 $ stack [
+  whenmod 16 8 (stutWith 4 0.0625 ((+12) . (|* gain 0.92))) $ n "<c c <c <~ c>> cs>(5,16)" # s "superhoover" # orbit 3 # gain 0.8,
+  n "<1(5,8) 1(5,8) 1(5,8) 1(5,8) 1(5,8) 1(5,8) <~ 1(5,8)> 1(8,8)>" # s "jungbass:5" # gain 2 # cut 1 # orbit 2,
+  n "<~ ~ ~ ~ ~ ~ <[c'maj*4] ~ > ~>" # s "superfork"
+]
+
+d1 $ stack [
+  stutWith 3 0.0625 ((+12) . (|* gain 0.92)) $ n "<c'maj d'min f'maj g'maj g'maj a'min e'min d'min>" *| n "1(9,16)" # s "superhoover" # gain 0.7
+]
+
+hush
+
+do
+  let bell = "superhoover"
+  d1 $ ifp ((/= 0) . (flip mod 2))
+    ((striate 2) . (stutWith 3 0.125 (+12)))
+    (stutWith 3 0.125 (+12))
+      $ stack [
+        n "<c'maj ~ d'min ~ e'min ~ f'maj ~>(3,8)" # s bell,
+        n "<~ c(3,8) ~ d(5,8) ~ e(3,8) ~ [[f ~ f ~] [f e d c]]>" # s bell
+    ] # legato 1.25
+
+d2 $ stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:4(5,8)" # gain 1.2
+
+d2 $ s "[bev]*4" # begin (range 0 0.75 $ rand) # rel 0.25 # speed 1.5 # gain 1.5
+
+
+d1 $ stack [
+  n "<[c g ~ g] [af g f g] [~ ef c ~] [ef f ~ ds] [d ~ d ds] [~ es c ~]>" |+ 12 # s "supervibe" # legato 1.25,
+  stutWith 5 0.125 (|* gain 0.99) $ n "<[~ g'maj ~ ~] [af'maj ~ ~ g'min] [~ ~ c'maj ~] [~ f'min ~ ~] [d'min ~ ~ ds'maj] [~ ~ c'maj ~]>" # s "superhoover" # gain 0.8,
+  n "1 1*2 1 ~" # s "bd" # gain 1.5
+]
+
+hush
+
+d1 $ stack [
+n "<[g*8]>" |+ 12 # s "supervibe" # legato 1.25,
+  stutWith 5 0.125 (|* gain 0.99) $ n "<[~ g'maj ~ ~] [af'min ~ ~ g'min] [~ ~ c'maj ~] [~ f'min ~ ~] [d'min ~ ~ ds'maj] [~ ~ c'maj ~]>" # s "superhoover" # gain 0.8,
+  s "bd bd*2 bd ~" # gain 1.5
+]
+
+d1 $ stack [
+  stutWith 4 0.0625 (+12) $ n "<[c ef ~ f] [g ~ [gs g] f] [~ d bf4 c] [d ef ~ c] [c b4 c d] [~ b4 g4 ~]>" |- 0 # s "supervibe" # legato 1.25,
+  stutWith 5 0.125 (|* gain 0.985) $ n "<[~ ef'maj ~ ~] [g'min ~ ~ f'maj] [~ ~ bf4'maj ~] [~ ef'min ~ ~] [c'min ~ ~ d'maj] [~ ~ g'maj ~]>" # s "superhoover" # gain 0.8,
+  n "1 1*2 1 ~" # s "bd:3" # gain 1.5
+]
+
+hush
+
+d1 $ stack [
+  s "[bd ~ bd*2 ~]",
+  s "hh*8",
+  s "~ cp ~ ~"
+]
+
+hush
+
+d2 $ stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:4(5,8)" # gain 1.2
+
+d3 $ s "[bd bd(2,3) bd*2 bd(2,3)]" # gain 1.3
+
+d1 $ stut 3 0.125 0.25 $ stack [
+  n "<[c*2 b4*2] [g4 e4] [b4 b4 c d][g4 g]>" |+ n "0" # s "supersquare" # gain 0.8,
+  n "<[c'maj b4'min] [g4'maj e4'min] [b4'maj b4'maj c'maj d][g4'maj e'min]>" # s "supersquare" # gain 1.2
+]
+
+hush
+
+--------------
+d1 $ stack [
+  n "1 1 1 1" # s "psr" # speed "0.2 0.7 0.5 1.2" # gain 1.3,
+  n "1? 1? 1? 1?" # s "speech" # gain 1.6
+]
+
+xfadeIn 1 16 $ stutWith 5 0.0625 (+8) $ stack [
+  n "<[f5'maj(4,5) b5'min(4,5) g5'maj(4,5) e5'min(4,5)]>" |+ (irand 8) # s "supersquare"
+]
+
+d1 $ stack [
+  s "tink*4?" # n (irand 4) # gain 1.6 # orbit 2
+]
+
+hush
+-------------
+
+d1 $ stutWith 3 0.125 (+8) $ stack [
+  n "1 1 1 1(2,3)" # s "hh:5" # gain 2
+]
+
+d2 $ stack [
+  n "1 <1 1*2> 1 <1 (2,3)>" # s "house" # gain 1.3
+]
+
+hush
+
+d3 $ stack [
+  n "<[e6 a'maj][f6 e6 d'min d6][d6 d'min e'min e6][e6 <f6 f'maj> e6 d6]>" # s "superpiano" # gain 0.9 # lpf 3000
+]
+
+hush
+
+d1 $ stutWith 3 0.125 (# s "hh:7") $ stack [
+  n "1 1 1 1(2,3)" # s "hh:5" # gain 2
+]
+
+d1 $ stutWith 3 0.125 (|* gain 0.79) $ stack [
+  n "<c'maj [f g] g4'min [e f] [[c'maj,e] [[e d] c]] [af'maj ~ ~ a'maj] f'maj>" # s "supervibe" # gain 1 # lpf 3000
+]
+
+d1 $ stutWith 3 0.06125 (stutWith 2 0.125 (|* gain 0.7)) $ stack [
+  n "<[c'maj, f g] e'maj f'min g'maj e'maj f'min e'min d'min c'maj ~>(3,8)" # s "superzow" # gain 0.75
+]
+
+d2 $ stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:4(5,8)" |- n "<4 4 4 4 0 0 0 0>" # gain 1.5 # room 0.1
+
+
+d2 $ n "< a'maj a'maj a'min [b, g, e]>" # s "superzow"
+
+-------------------------------------------
+d1 $ stack [
+  n "<c'maj*4 g4'maj*4 f'maj*4 g4'maj*4>" # s "superpiano" # gain 0.73,
+  n "<<[[c7*2] [e6 f6] g6*2] c7*3> [g6 a6 [a b]] <[c7 [g6 f6] e6] [c7 b6 c7]> <[d7 e7 d7] d7>>" # s "superpiano",
+  n "<c3 g3 f3 g3>" # s "supervibe" # gain 0.85,
+  n "~" # s "superpiano"
+]
+
+d1 $ stack [
+  n "<a4'min*4 g4'maj*4 d'min*4 g4'maj*4>" # s "superpiano" # gain 0.70,
+  n "<a5 <g5 [c6 d6]> <[f5 g5 f5 e5] [d5 ~ e5 f5]> <[g5 d5] g5>>" # s "superpiano",
+  n "<a6 g6 d6 g6>" # s "supervibe" # gain 0.80,
+  n "~" # s "superpiano"
+]
+
+hush
+--------------------------------------------
+
+
+d2 $ fast (irand 5) $ stutWith 2 1 (+8) $ n "<c5 ~>" |+ (irand 16) # s "supervibe" # voice "[0.1, 0]/8" # attack "0.7" # sustain "4" # release "4" # decay "1.5"
+# room 0.3 # vowel "u" # size "0" # gain 0.8 # lpf 1000
+
+d2 $ fast (irand 5) $ stutWith 2 1 (+8) $ n "<c5 ~>" |+ (irand 16) # s "supervibe" # voice "[0.1, 0]/8" # attack "0.7" # sustain "4" # release "4" # decay "1.5"
+# room 0.3 # vowel "u" # size "0" # gain 0.8 # lpf 1000

@@ -1,0 +1,27 @@
+bps (140/120)
+
+--Wind down
+d1 $ stack [
+  off 0.125 (id) $ sound "[arp(3,8), ~ bd ~ [bd*4 sn*2]]",
+  jux (rev) $ off 0.25 (+12) $ sound "sax" # n (irand 21) # accelerate (-2) # gain 0.8,
+  degrade $ sound "bd(3,8) sn(5,8)"
+  ]
+
+
+--Alien submarine
+do
+  let ac = choose [0.04, -0.04, 0.08, -0.08]
+  d1 $ stack [
+    sound "seawolf:1" # speed (-1) # lpf 150 # begin "<0.3, 0.2, 0.1>" # gain 0.7,
+    loopAt 2 $ degradeBy 0.5 $ sound "wind" # n (irand 10) # speed 0.6 # lpf 1400 # accelerate ac # gain 1.2
+    ] # room 2
+
+d2 $ sound "speech*4?" # n (irand 6) # speed 2 # vowel "o" # bpf 500 # gain 0.7
+
+d3 $ loopAt 2 $ n "1 ~ 1 ~" # "xmas" # room 0.2 # lpf 600 # vowel "a" # accelerate (-2) # gain 0.6
+
+d4 $ stut 2 0.8 0.125 $ degradeBy 0.95 $ sound "battles" # lpf "<100 200 300 250 200 800>"
+
+d5 $ every 2 (# gain 0.9) $ sound "feelfx" # gain 0 # sustain 20 # room 1.1
+
+hush

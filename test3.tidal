@@ -1,0 +1,24 @@
+
+d1
+  $ stack
+  [
+    striate 5 $ chop 2 $ sound "supersaw"
+    # n (scale "lydian" "0 .. 7")  |+| n "<2 1 6 9>"
+    # lpf (slow 2 $ range 1000 2000 sine),
+    striate "<5 7 9 7>" $ chop 2 $ stutWith (run 8) 0.25 (id)
+    $ sound "[bd*4 cp*4]" |+| "<hh*16>"
+    # lpf (slow 4 $ range 500 4000 sine),
+    whenmod 4 3 (|+| "sn*16") $ sound "<[bd cp]*4>" # lpf 2000 # gain 1.2
+  ]
+
+xfadeIn 1 4 $ sound "<[bd cp]*4, ~ bd*8>" # lpf 2000 # gain 1.2
+
+xfadeIn 1 0.1
+  $ stack
+  [
+    striate (run 10) $ stutWith (run 8) 0.25 (#gain "<2 3 4 5>")
+    $ sound "[bd*8 cp*8]" |+| "<sn*16>" # lpf (slow 4 $ range 500 4000 sine),
+    whenmod 4 3 (|+| "cp*16") $ sound "<[bd cp]*4>" # lpf 1800 # gain 1.2
+  ]
+
+hush

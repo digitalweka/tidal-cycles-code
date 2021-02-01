@@ -1,0 +1,159 @@
+bps (140/120)
+
+d1
+  $ stack
+  [
+    chop 4 $ stutWith (run 16) 0.0625 (id) $ sound "supersquare"
+    # n (scale "lydian" "0 .. 8")  |+| n "<6 4 2 2>"
+    # room 0.1 # vowel "u" # attack "0.9" # decay "0.1" # sustain 0.5
+    # lpf (slow 2 $ range 1500 2000 sine) # gain 1
+  ]
+
+hush
+
+d2 $ fast 2 $ striate "4" $ chop 2 $ stutWith (run 8) 0.25 (id)
+$ sound "[bd*8 world*8]"
+# lpf (slow 4 $ range 1500 4000 sine)
+# gain 0.9
+
+d1 $ sound "[bd <~ bd*16> bd*2 bd*4] [<cp [hh hh*2 hh hh*8]>]" # gain 2
+
+d2 $ degradeBy 0.91 $ chop 10 $ fast 32 $ s "xmas" # accelerate (irand 5 + 1)  # gain 2
+
+hush
+
+do
+  d1 $ stack [
+    n "<c3 ~ ~ ~ ~>" # s "superzow"
+    # attack 0.1 # decay 8 # sustain 8 # release 8 # accelerate 0.4 # gain 1.5
+    ]
+
+do
+  let high = stutWith 8 (0.125) ((|* speed 0.99) . (|* gain 0.9)) $ s "erk(3,8)" # gain 1.8 # rel 0.1 # speed 1
+  d1 $ stack
+    [
+      whenmod 8 6 (const $ high) $ stutWith 3 0.125 ((|* gain 0.8) . (id)) $
+      sound "bd(3,8)" # gain 1.4
+      # sustain 0.4 # release 0.3 # speed 0.8 # lpf 1000 # crush 1,
+      sound "hh(5,8)" # gain 1.4
+    ] # room 0.3
+
+do
+  let v = 0.5 + rand * 0.5
+  d1 $ striate 9 $ sound "bd*16" # gain 1.4 # speed 1 # begin (0.1 + rand) # cut 1
+
+d1 $ slow 2 $ off (0.125) (+12) $ striate 2 $ n (scale "lydian" "0 .. 5") |+| n "<1 2 0 2 -1 4 9 7>" # s "superpiano(5,8)"
+
+hush
+
+d1 $ whenmod 16 15 (const $ stack [
+  sound "~",
+  sound "sd(13,16)",
+  sound "[~ 808oh]*4"
+  ]) $ whenmod 8 6 (const $ stack [
+  sound "bd(6,8,-2)",
+  sound "[808sd:1(5,16)]" # gain 1.1 # speed 1.16,
+  sound "[~ 808oh]*4"
+  ]) $ stack [
+  sound "bd*4",
+  sound "[~ sd]*2",
+  sound "[~ 808oh]*4",
+  sound "cc/8" # gain 0.8 # hpf 3000
+  ]
+
+
+-- cybergoth pong
+d1 $ stack [
+  --n "c" # s "supertron" # attack 0.05 # decay 0.1 # sustain 0.25 # release 0.5 # vowel "u o" # gain 2,
+  s "[bd:3*4]" # room 0.3 # gain 1.5,
+  n "<[c(5,8) [c c d ef]] [c(5,8) [c c b4 as4]]>" # s "superzow"
+]
+
+
+hush
+
+
+d1 $ stack [
+  off (0.0625) (+12) $ off (0.125/1) (+12) $ stutWith 3 0.125 (|* gain 0.85) $ n "<c'maj d'maj e'min fs'dim b'min d'maj g'maj c'maj>(3,8)"
+  # s "supersaw" # gain 0.9,
+  stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(5,8)",
+  sound "bd(3,8)" # gain 2
+]
+
+d1 $ stack [
+  off 0.125 (+12) $ off 0.125 (+12) $ stutWith 3 0.125 (|* gain 0.9)
+  $ n "<g'min bf'maj d'min ef'maj>(3,8)"
+  # s "supersaw" # gain 0.93 # lpf 7000,
+  stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(5,8)",
+  sound "bd(3,8)" # gain 1.8
+]
+
+hush
+
+---------------------------
+d1 $ stack [
+  whenmod 4 2 (# speed 1) $ s "jungbass:11(5,8)" # speed 0.8 # cut 1 # gain 1.1,
+  s "stab*8" |+| n "1 2 3 4 5 6 7 8" # gain 0.9
+]
+---------------------------
+
+hush
+
+xfadeIn 1 4 $ stack [
+  off 0.125 (+12) $ stutWith 3 0.125 (|* gain 0.9)
+  $ n "<b'min e'min g'maj fs'min>(3,8)"
+  # s "supersaw" # gain 1 # lpf 7000,
+  stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(5,8)",
+  sound "bd(3,8)" # gain 1.8
+]
+
+xfadeIn 1 4 $ stack [
+  off 0.125 (+12) $ stutWith 3 0.125 (|* gain 0.95) $ striate 2
+  $ n "<b'min e'min g'maj fs'min>(5,8)"
+  # s "supersaw" # gain 1 # cut 1,
+  "bass3:4(5,9)" # speed "<0.9 1.2 0.7 0.8>" # gain 1,
+  sound "<bd(3,8) bd(5,8)>" # gain 1.5
+]
+
+--------------------------------------
+d1 $
+  whenmod 32 24 (# lpf (slow 8 $ range 1000 10000 saw)) $
+  stack [
+    off 0.125 (+12) $ stutWith 4 0.125 (|* gain 0.9)
+    $ n "<b'min e'min g'maj fs'min>(3,8)"
+    # s "superhoover" # gain 0.9,
+    stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(5,8)" # gain 0.9,
+    sound "bd(3,8)" # gain 1.8
+  ] # lpf 1000
+
+d2 $
+  stack [
+    off 0.125 (+12) $ stutWith 4 0.125 (|* gain 0.93) $ striate 2
+    $ n "<b'min e'min g'maj fs'min>(5,8)"
+    # s "superzow" # gain 0.92 # cut 1
+  ]
+------------------------------------
+
+hush
+
+
+do {
+  d1 $ seqPLoop [
+    (0, 16, stack [
+      off (0.125) (+12) $ striate 2 $ n "<[c4, e4, g4] [g4, b4, d5] [a4, c5, e5] [f4, a4, c5]>(5,8)"
+      # s "supersquare" # vowel "u" # lpf (slow 4 $ range 2000 15000 sine) # gain 1.1,
+      stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(3,8)" # gain 2
+    ]),
+    (8, 16, degrade $ off (0.125*3) (|+| n "[30 24 36 12]") $ s "[arpy*8]" # lpf 1500 # gain 1.55),
+    (16, 32, stack [
+      stutWith 8 (0.125) ((|* speed 0.99) . (|* gain 0.9)) $ n "<<c4 c8> <g7 g4> <a4 a7> f4>(5,8)" # s "supersquare" # accelerate (-0.035) # gain 1,
+      stutWith 3 (0.125) ((|* gain 0.75)) $ sound "bass3:5(3,8)" # gain 1.15
+    ])
+  ]
+}
+
+d1 $ off 0.125 (+12) $ stutWith 3 0.125 (|* gain 0.85) $ striate 2 $ n "<d'maj e'min a'maj fs'min>(5,8)" # s "supermandolin" # gain 1.2 # lpf (range 500 2000 sine)
+
+d1 $ off 0.125 (+12) $ stutWith 3 0.125 (|* gain 0.85) $ striate 2 $ n "<d'maj e'min fs'min a'maj>(5,8)" # s "supermandolin" # gain 1.2
+
+hush

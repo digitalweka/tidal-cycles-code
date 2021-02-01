@@ -1,0 +1,68 @@
+hush
+
+d1 $ stutWith 2 (1/6) (+12) $ n "<[a5, c6]*4 [b5, d6]*4 [a5, e6]*4 [c6'maj]*4 [g5,e6]*4 [b5, d6]*4 [a5, c6]*4 [a5, c6]*4>" # s "supersaw" # lpf 1050 # gain 0.9 # cps 0.5
+
+d1 $ n "<[a4, c5]*4 [b4, d5]*4 [a4, e5]*4 [c5'maj]*4 [g4,e5]*4 [b4, d5]*4 [a4, c5]*4 [a4, c5]*4>" # s "supersaw" # gain 0.9 # cps 0.5
+
+
+d2 $ stutWith 3 (1/4) (|*| gain 0.97) $ n "[1*2 1] [1 1*2](<1,2,3>,8) ? [1 1*4]" # s "casio:0" # gain 1
+
+
+d1 $ stutWith 3 (1/4) (|*| gain 0.97) $  n "[1 1*2] [1 1] ? [1*2 1](<1,2,3>,8)" # s "casio:1" # gain 1
+
+d3 $ silence
+
+d3 $ n "[1 1 1 1 1 1 1 1(8,8)]" # s "bd:3" # gain 2
+
+
+d2 $ n "[c]" # s "[supersaw]" # sustain "0.9" # voice "0.1" # semitone (slow 32 $ range 5 9 sine) # resonance "0.1" # lfo "0.3" # cps 2
+
+
+-- BEGIN INDUSTRIAL BASS
+
+d1 $ stack [
+  n "[1 1 1 1(2,8)]" # s "bass2:1" # squiz (slow 8 $ range 1 5 saw) # gain 1.2,
+  n "[<1 1 1 1*2> <~ ~ ~ ~> <1 1 1 1*2> <~ ~ ~ 1>]" # s "jungbass" # gain 1.9 # cps 0.55
+]
+
+d2 $ every 8 (#gain 2) $ n "<[1*32 <~ 1*32> ~ ~] ~ ~ ~ >" # s "industrial:10" # gain 1.2 # room 0.3 # resonance 0.3
+
+d3 $ stutWith 2 (1/4) (|+| 3) $ n "<c5 df5 ef5 ff5>" # s "supersaw" # crush 2.1 # resonance 0.2 # semitone 0.8
+
+d4 $ n "1*16" # s "industrial:3" # gain (slow 8 $ range 0 2 saw)
+
+hush
+
+-- END INDUSTRIAL BASS
+
+d6 $ n "1*4" # s "invaders:14"
+
+
+hush
+
+
+d4 $ n "1*8" # s "arpy" # gain (slow 8 $ range 0.5 1 saw) # speed (slow 8 $ range 1 2 saw) # cps (slow 8 $ range 0.8 1 saw)
+
+
+
+d1 $ n "<c4'maj*8 d4'maj*8 e4'maj*8>" # s "supersaw" # cps (slow 8 $ range 0.25 2 sine) # semitone (slow 8 $ range 1 9 sine) # lfo "0.1" # voice "0.1"
+
+
+squiz (range 1 10 saw) # coarse "10 10 10"
+
+hush
+
+
+d1 $ stack [
+  stutWith 2 (1/2) (#s "bd:3") $ n "<bf'min(<8 5 3>,8) [ef*4 <df*4 af'min*4>]>"  # s "superzow" # lpf (irand 2000),
+  n "1? 1*2? 1? ~" # s "cp" # gain 1.2 # room 0.05
+]
+
+setcps 0.55
+
+d1 $ stack [
+  stutWith 2 (1/2) ((#s "bd:3") . (# rev 1)) $ n "<bf'min(<8 5 3>,8) [ef*4 <df*4 af'min*4>]>"  # s "superzow" # lpf (irand 2000),
+  n "1? 1*2? 1? ~" # s "cp" # gain 1.2 # room 0.05
+]
+
+hush
